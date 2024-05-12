@@ -1,6 +1,8 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
+
 import 'package:mychat_app/components/model/message.dart';
 
 class ChatServices extends ChangeNotifier {
@@ -27,7 +29,7 @@ class ChatServices extends ChangeNotifier {
     ids.sort(); //sort the ids(this ensures the chat room id is always the same for any pair of the people)
     String chatRoomId = ids
         .join('_'); //combine the ids into a single string to use as achatroomID
-        
+
 //Add new message to database
     await _fireStore
         .collection('chat_rooms')
@@ -49,5 +51,17 @@ class ChatServices extends ChangeNotifier {
         .collection('message')
         .orderBy('timestamp', descending: false)
         .snapshots();
+  }
+
+ 
+
+  toastmesssage() {
+    return Fluttertoast.showToast(
+        msg: "This is a Toast message",
+        toastLength: Toast.LENGTH_SHORT,
+        gravity: ToastGravity.CENTER,
+        timeInSecForIosWeb: 1,
+        textColor: Colors.white,
+        fontSize: 16.0);
   }
 }

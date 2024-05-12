@@ -1,5 +1,3 @@
-
-
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -17,8 +15,9 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
 // instance of auth
   final FirebaseAuth _auth = FirebaseAuth.instance;
+  
 
-  // sign out user
+ // sign out user
   void signOut() {
     // get auth service
     final authService = Provider.of<AuthServices>(context, listen: false);
@@ -27,12 +26,13 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
+   
     return Scaffold(
       appBar: AppBar(
         title: const Text('Home page'),
         actions: [
           // Sign out button
-          IconButton(onPressed: signOut, icon: Icon(Icons.logout))
+          IconButton(onPressed: signOut, icon: const Icon(Icons.logout))
         ],
       ),
       body: _buildUserList(),
@@ -51,12 +51,14 @@ class _HomePageState extends State<HomePage> {
           if (snapshots.connectionState == ConnectionState.waiting) {
             return const Text('Loading......');
           }
+
           return ListView(
               children: snapshots.data!.docs
                   .map<Widget>((doc) => _buildUserListItem(doc))
                   .toList());
         });
   }
+
 
   // build individual user list items
   Widget _buildUserListItem(DocumentSnapshot document) {
@@ -65,7 +67,7 @@ class _HomePageState extends State<HomePage> {
     // display all user except current user
     if (_auth.currentUser!.email != data['email']) {
       return ListTile(
-        title:Text( data['email']),
+        title: Text(data['email']),
         onTap: () {
           // pass the clicked user's UID to the chat page
           Navigator.push(
@@ -79,8 +81,11 @@ class _HomePageState extends State<HomePage> {
           );
         },
       );
-    } else {
+    } 
+  
+    else {
       return Container();
     }
   }
+   
 }

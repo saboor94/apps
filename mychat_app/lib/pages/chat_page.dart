@@ -15,6 +15,7 @@ class ChatPage extends StatefulWidget {
 
   @override
   State<ChatPage> createState() => _ChatPageState();
+
 }
 
 class _ChatPageState extends State<ChatPage> {
@@ -63,16 +64,13 @@ class _ChatPageState extends State<ChatPage> {
           if (snapshot.connectionState == ConnectionState.waiting) {
             return const Text('loading..');
           }
-          // var data = snapshot.data!.docs
-          //     .map((document) => _buildMessageItem(document))
-          //     .toList();
-          //      print(data);
+          
+
           return ListView(
             shrinkWrap: true,
             children: snapshot.data!.docs
                 .map((document) => _buildMessageItem(document))
                 .toList(),
-              
           );
         });
   }
@@ -123,7 +121,8 @@ class _ChatPageState extends State<ChatPage> {
                   hintText: 'Enter Message',
                   obscureText: false)),
           IconButton(
-              onPressed: sendMessage, icon:const Icon(Icons.arrow_upward, size: 40))
+              onPressed: sendMessage,
+              icon: const Icon(Icons.arrow_upward, size: 40))
         ],
       ),
     );
