@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:mychat_app/components/my_button.dart';
 import 'package:mychat_app/components/my_text_field.dart';
 import 'package:mychat_app/services/auth_services.dart';
@@ -6,13 +7,17 @@ import 'package:provider/provider.dart';
 
 class LoginPage extends StatefulWidget {
   final void Function()? onTap;
-  const LoginPage({super.key, required this.onTap});
+ const LoginPage({super.key, required this.onTap});
 
   @override
   State<LoginPage> createState() => _LoginPageState();
 }
 
 class _LoginPageState extends State<LoginPage> {
+
+
+
+
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
   Future<void> signIn() async {
@@ -34,6 +39,7 @@ class _LoginPageState extends State<LoginPage> {
 
   @override
   Widget build(BuildContext context) {
+  
     return Scaffold(
         backgroundColor: Colors.grey[300],
         body: SafeArea(
@@ -100,5 +106,8 @@ class _LoginPageState extends State<LoginPage> {
             ),
           ),
         ));
+  }
+
+  void onAdLoaded(InterstitialAd ad) {
   }
 }
